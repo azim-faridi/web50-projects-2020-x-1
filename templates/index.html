@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+
+    <h3>Search for a book!</h3>
+    <form action="/search" method="GET">
+        <div class="form-group">
+            <input type="text" class="w3-input w3-hover-blue" name="book" autofocus aria-describedby="bookHelp" placeholder="ISBN, Title or Author">
+            <small id="bookHelp" class="form-text text-muted">Example: 0316015849, Twilight or Stephenie Meyer</small>
+        </div>
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+{% endblock %}

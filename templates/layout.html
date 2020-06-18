@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">   
+    <link rel="stylesheet" href="../static/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href= "{{ url_for('static',filename='style.css') }}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <title>Cover-read: {% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <style>
+        body {
+           background-color: #cccccc;
+       }
+   </style>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light border">
+    <a class="navbar-brand" style="color:gr">
+        Project 1: Books
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbarNavDropdown">
+    {% if session.user_id %}
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="/">Search</a></li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link">{{ session.user_name }}</a></li>
+        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+    </ul>
+    {% else %}
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>                
+        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+    </ul>
+    {% endif %}
+</div>
+</nav>
+<h1>{% block heading %}{% endblock %}</h1>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<main class="container p-5">
+    {% block content %}
+    {% endblock %}
+</main>
+
+
+<div class="footer-copyright text-center py-3">Created by:
+    <a href="https://www.linkedin.com/in/azim-aslam-faridi-05034530/"> Azim Aslam Faridi</a>
+</div>
+</body>
+
+</html>
