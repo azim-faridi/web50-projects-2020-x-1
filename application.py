@@ -167,12 +167,13 @@ def book(isbn):
 
         rating = int(rating)
 
-        db.execute("INSERT INTO reviews (user_id, book_id, comment, rating) VALUES \
-                    (:user_id, :book_id, :comment, :rating)",
+        db.execute("INSERT INTO reviews (user_id, book_id, comment, rating, time) VALUES \
+                    (:user_id, :book_id, :comment, :rating, :time)",
                     {"user_id": currentUser, 
                     "book_id": bookId, 
                     "comment": comment, 
-                    "rating": rating})
+                    "rating": rating,
+                    "time": time})
        
         db.commit()
 
@@ -204,7 +205,7 @@ def book(isbn):
         book = row.fetchone()
         book = book[0]
 
-        results = db.execute("SELECT reviews.user_id, reviews.comment, reviews.rating FROM reviews INNER JOIN users ON reviews.user_id = users.user_id WHERE book_id = :book",
+        results = db.execute("SELECT reviews.user_id, reviews.comment, reviews.rating, reviews.time  FROM reviews INNER JOIN users ON reviews.user_id = users.user_id WHERE book_id = :book",
                             {"book": book})
 
         reviews = results.fetchall()
